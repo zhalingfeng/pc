@@ -13,7 +13,7 @@ def get_html(url):
     print(html)
     return etree.HTML(html)
 
-
+# 请求
 def post_task_id():
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
                              'Chrome/51.0.2704.63 Safari/537.36'}
@@ -24,7 +24,7 @@ def post_task_id():
     res = requests.post(url, params=params, headers=headers)
     return res.json()
 
-
+# 提取事项名称
 def get_task_info(res):
     info = res['AUDIT_ITEM']
     data = {
