@@ -4,15 +4,6 @@ from lxml import etree
 import requests
 
 
-def get_html(url):
-    headers = {'User-Agent': 'Mozilla/5.0(Windows NT 10.0; WOW64) AppleWebKit/537.36(KHTML,like Gecko)'
-                             'Chrome/51.0.2704.63 Safari/537.36'}
-    req = urllib.request.Request(url=url, headers=headers)
-    res = urllib.request.urlopen(req)
-    html = res.read().decode('utf-8')
-    print(html)
-    return etree.HTML(html)
-
 # 请求
 def post_task_id():
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -24,14 +15,15 @@ def post_task_id():
     res = requests.post(url, params=params, headers=headers)
     return res.json()
 
+
 # 提取事项名称
 def get_task_info(res):
     info = res['AUDIT_ITEM']
     data = {
-        'matter_name': info['CATANAME']
+        'matter_name': info['CATANAME'],
+        'dept_name': info['DEPT_NAME']
     }
     return data
 
 
 print(get_task_info(post_task_id()))
-
